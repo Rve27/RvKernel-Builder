@@ -1,5 +1,23 @@
 #!/usr/bin/env bash
 
+rm -rf kernel
+git clone --depth=1 $source_kernel -b $branch kernel
+cd kernel
+
+setup_clang() {
+    rm -rf clang
+    echo "Downloading clang..."
+    mkdir -p ${PWD}/clang
+        if ! wget --no-check-certificate https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+archive/refs/heads/main/clang-r522817.tar.gz -O $GITHUB_WORKSPACE/clang/clang-r522817.tar.gz &>/dev/null; then
+            err "Failed downloading toolchain"
+            exit 1
+        fi
+        tar -xzf $GITHUB_WORKSPACE/clang/clang-r522817.tar.gz -C $GITHUB_WORKSPACE/clang
+        PATH="${PWD}/clang/bin:${PATH}"
+    echo "Done"
+}
+
+#setup
 IMAGE="$GITHUB_WORKSPACE/kernel/out/arch/arm64/boot/Image.gz-dtb"
 DATE=$(date +"%Y%m%d-%H%M")
 START=$(date +"%s")
@@ -112,10 +130,12 @@ zipping() {
 
 success() {
     tg "
-Build success | *${DEVICE} (${CODENAME})* | ${KBUILD_COMPILER_STRING}
+Build success
+*${DEVICE} (${CODENAME})* | ${KBUILD_COMPILER_STRING}
 $((DIFF / 60)) minute(s) and $((DIFF % 60)) second(s)."
 }
 
+setup_clang
 sendinfo
 compile
 zipping
