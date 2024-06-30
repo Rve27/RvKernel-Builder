@@ -1,13 +1,18 @@
 name: Compile Kernel
 
 on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
   workflow_dispatch:
+    inputs:
+      token:
+          description: 'Telegram bot token'
+          required: true
+      chat_id:
+          description: 'Telegram chat id'
+          required: true
+
+env:
+  token: ${{ github.event.inputs.token }}
+  chat_id: ${{ github.event.inputs.chat_id }}
 
 jobs:
   build:
