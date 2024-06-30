@@ -6,6 +6,12 @@ on:
       device:
           description: 'device codename'
           required: true
+      source_kernel:
+          description: 'link source kernel'
+          required: true
+      branch:
+          description: 'branch'
+          required: true
       token:
           description: 'Telegram bot token'
           required: true
@@ -15,13 +21,19 @@ on:
       chat_id_2:
           description: 'Telegram chat id 2'
           required: true
+      topic_id:
+          description: 'Telegram topic id'
+          required: true
 
 env:
   TZ: Asia/Jakarta
   DEVICE: ${{ github.event.inputs.device }}
+  source_kernel: ${{ github.event.inputs.source_kernel }}
+  branch: ${{ github.event.inputs.branch }}
   token: ${{ github.event.inputs.token }}
   chat_id: ${{ github.event.inputs.chat_id }}
   chat_id_2: ${{ github.event.inputs.chat_id_2 }}
+  topic_id: ${{ github.event.inputs.topic_id }}
 
 jobs:
   build:
@@ -33,7 +45,7 @@ jobs:
 
     - name: Clone Kernel Source
       run: |
-        git clone --depth=1 https://github.com/Rve27/RvKernel-Beryllium.git -b test kernel
+        git clone --depth=1 $source_kernel -b $branch kernel
         cd kernel
 
     - name: Set up dependencies
