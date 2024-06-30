@@ -112,11 +112,14 @@ zipping() {
 
 success() {
     tg "
-Build success | *${DEVICE} (${CODENAME})* | ${KBUILD_COMPILER_STRING}"
-$((DIFF / 60)) minute(s) and $((DIFF % 60)) second(s).
+Build success | *${DEVICE} (${CODENAME})* | ${KBUILD_COMPILER_STRING}
+$((DIFF / 60)) minute(s) and $((DIFF % 60)) second(s)."
+}
+
 sendinfo
 compile
 zipping
 END=$(date +"%s")
 DIFF=$((END - START))
 push
+success
