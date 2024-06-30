@@ -3,16 +3,24 @@ name: Compile Kernel
 on:
   workflow_dispatch:
     inputs:
+      device:
+          description: 'device codename'
+          required: true
       token:
           description: 'Telegram bot token'
           required: true
       chat_id:
           description: 'Telegram chat id'
           required: true
+      chat_id_2:
+          description: 'Telegram chat id 2'
+          required: true
 
 env:
+  DEVICE: ${{ github.event.inputs.device }}
   token: ${{ github.event.inputs.token }}
   chat_id: ${{ github.event.inputs.chat_id }}
+  chat_id_2: ${{ github.event.inputs.chat_id_2 }}
 
 jobs:
   build:
@@ -38,6 +46,7 @@ jobs:
         tar -xzf $GITHUB_WORKSPACE/clang/clang-r522817.tar.gz -C $GITHUB_WORKSPACE/clang
         export PATH="$GITHUB_WORKSPACE/clang/bin:$PATH"
 
-    - name: Compile Kernel
+    - name: Compile
       run: |
+        if [ "${DEVICE}" = "beryllium" ]; then
         
