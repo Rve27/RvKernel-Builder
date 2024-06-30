@@ -71,7 +71,7 @@ finderr() {
         -d chat_id="$chat_id" \
         -d "disable_web_page_preview=true" \
         -d "parse_mode=markdown" \
-        -d text="Build throw an error(s)"
+        -d text="Build failed | *${DEVICE} (${CODENAME})* | ${KBUILD_COMPILER_STRING}"
     exit 1
 }
 
@@ -110,6 +110,10 @@ zipping() {
     cd ..
 }
 
+success() {
+    tg "
+Build success | *${DEVICE} (${CODENAME})* | ${KBUILD_COMPILER_STRING}"
+$((DIFF / 60)) minute(s) and $((DIFF % 60)) second(s).
 sendinfo
 compile
 zipping
