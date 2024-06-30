@@ -17,6 +17,7 @@ on:
           required: true
 
 env:
+  TZ: Asia/Jakarta
   DEVICE: ${{ github.event.inputs.device }}
   token: ${{ github.event.inputs.token }}
   chat_id: ${{ github.event.inputs.chat_id }}
@@ -49,4 +50,7 @@ jobs:
     - name: Compile
       run: |
         if [ "${DEVICE}" = "beryllium" ]; then
-        
+          wget https://raw.githubusercontent.com/Rve27/RvKernel-Builder/main/scripts/beryllium.sh
+          chmod +x beryllium.sh
+          bash beryllium.sh
+        fi
