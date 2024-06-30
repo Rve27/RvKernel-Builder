@@ -43,24 +43,9 @@ jobs:
     - name: Checkout workflow repository
       uses: actions/checkout@v2
 
-    - name: Clone Kernel Source
-      run: |
-        git clone --depth=1 $source_kernel -b $branch kernel
-        cd kernel
-
     - name: Set up dependencies
       run: |
         sudo apt update -y && sudo apt upgrade -y && sudo apt install nano bc bison ca-certificates curl flex gcc git libc6-dev libssl-dev openssl python-is-python3 ssh wget zip zstd sudo make clang gcc-arm-linux-gnueabi software-properties-common build-essential libarchive-tools gcc-aarch64-linux-gnu -y && sudo apt install build-essential -y && sudo apt install libssl-dev libffi-dev libncurses5-dev zlib1g zlib1g-dev libreadline-dev libbz2-dev libsqlite3-dev make gcc -y && sudo apt install pigz -y && sudo apt install python2 -y && sudo apt install python3 -y && sudo apt install cpio -y && sudo apt install lld -y && sudo apt install llvm -y && sudo apt-get install g++-aarch64-linux-gnu -y && sudo apt install libelf-dev -y && sudo apt install ccache -y
-
-    - name: Download and extract clang
-      run: |
-        mkdir -p $GITHUB_WORKSPACE/clang
-        if ! wget --no-check-certificate https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+archive/refs/heads/main/clang-r522817.tar.gz -O $GITHUB_WORKSPACE/clang/clang-r522817.tar.gz &>/dev/null; then
-            err "Failed downloading toolchain"
-            exit 1
-        fi
-        tar -xzf $GITHUB_WORKSPACE/clang/clang-r522817.tar.gz -C $GITHUB_WORKSPACE/clang
-        export PATH="$GITHUB_WORKSPACE/clang/bin:$PATH"
 
     - name: Compile
       run: |
