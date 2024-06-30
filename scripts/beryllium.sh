@@ -1,11 +1,8 @@
 #!/usr/bin/env bash
 
-export PATH="$GITHUB_WORKSPACE/clang/bin:$PATH"
 IMAGE="$GITHUB_WORKSPACE/kernel/out/arch/arm64/boot/Image.gz-dtb"
 DATE=$(date +"%Y%m%d-%H%M")
 START=$(date +"%s")
-CACHE=1
-export CACHE
 KBUILD_COMPILER_STRING="AOSP Clang 18.0.1"
 export KBUILD_COMPILER_STRING
 ARCH=arm64
@@ -26,11 +23,8 @@ PROCS=$(nproc --all)
 export PROCS
 STATUS=Testing
 export STATUS
-source "${HOME}"/.bashrc && source "${HOME}"/.profile
-if [ $CACHE = 1 ]; then
-    ccache -M 100G
-    export USE_CCACHE=1
-fi
+ccache -M 100G
+export USE_CCACHE=1
 LC_ALL=C
 export LC_ALL
 
