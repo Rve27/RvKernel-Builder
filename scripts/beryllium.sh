@@ -29,7 +29,12 @@ LC_ALL=C
 export LC_ALL
 
 tg() {
-    curl -sX POST https://api.telegram.org/bot"${token}"/sendMessage -d chat_id="${chat_id}" -d parse_mode=Markdown -d disable_web_page_preview=true -d text="$1" &>/dev/null
+    curl -sX POST https://api.telegram.org/bot"${token}"/sendMessage \
+        -d chat_id="${chat_id}" \
+        -d parse_mode=Markdown \
+        -d disable_web_page_preview=true \
+        -d message_thread_id="${topic_id}" \
+        -d text="$1" &>/dev/null
 }
 
 tgs() {
