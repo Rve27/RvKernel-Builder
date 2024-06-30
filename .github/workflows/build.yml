@@ -54,6 +54,7 @@ jobs:
       run: |
         if [ "${DEVICE}" = "beryllium" ]; then
           wget https://raw.githubusercontent.com/Rve27/RvKernel-Builder/main/scripts/beryllium.sh
+          cp beryllium.sh $GITHUB_WORKSPACE/kernel/
           chmod +x beryllium.sh
-          bash beryllium.sh
+          bash $GITHUB_WORKSPACE/kernel/beryllium.sh
         fi
