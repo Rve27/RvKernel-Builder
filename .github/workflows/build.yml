@@ -27,7 +27,7 @@ on:
 
 env:
   TZ: Asia/Jakarta
-  DEVICE: ${{ github.event.inputs.device }}
+  DEVICE_2: ${{ github.event.inputs.device }}
   source_kernel: ${{ github.event.inputs.source_kernel }}
   branch: ${{ github.event.inputs.branch }}
   token: ${{ github.event.inputs.token }}
@@ -46,6 +46,12 @@ jobs:
 
     - name: Compile
       run: |
-        if [ "${DEVICE}" = "beryllium" ]; then
+        if [ "${DEVICE_2}" = "beryllium" ]; then
           wget https://raw.githubusercontent.com/Rve27/RvKernel-Builder/main/scripts/beryllium.sh && chmod +x beryllium.sh && bash beryllium.sh
+        elif [ "${DEVICE_2}" = "riva" ]; then
+          wget https://raw.githubusercontent.com/Rve27/RvKernel-Builder/main/scripts/mi8917.sh && chmod +x mi8917.sh && bash mi8917.sh
+        elif [ "${DEVICE_2}" = "rolex" ]; then
+          wget https://raw.githubusercontent.com/Rve27/RvKernel-Builder/main/scripts/mi8917.sh && chmod +x mi8917.sh && bash mi8917.sh
+        elif [ "${DEVICE_2}" = "ugglite" ]; then
+          wget https://raw.githubusercontent.com/Rve27/RvKernel-Builder/main/scripts/mi8917.sh && chmod +x mi8917.sh && bash mi8917.sh
         fi
