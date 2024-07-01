@@ -46,12 +46,16 @@ jobs:
 
     - name: Compile
       run: |
-        if [ "${DEVICE_2}" = "beryllium" ]; then
-          wget https://raw.githubusercontent.com/Rve27/RvKernel-Builder/main/scripts/beryllium.sh && chmod +x beryllium.sh && bash beryllium.sh
-        elif [ "${DEVICE_2}" = "riva" ]; then
-          wget https://raw.githubusercontent.com/Rve27/RvKernel-Builder/main/scripts/mi8917.sh && chmod +x mi8917.sh && bash mi8917.sh
-        elif [ "${DEVICE_2}" = "rolex" ]; then
-          wget https://raw.githubusercontent.com/Rve27/RvKernel-Builder/main/scripts/mi8917.sh && chmod +x mi8917.sh && bash mi8917.sh
-        elif [ "${DEVICE_2}" = "ugglite" ]; then
-          wget https://raw.githubusercontent.com/Rve27/RvKernel-Builder/main/scripts/mi8917.sh && chmod +x mi8917.sh && bash mi8917.sh
-        fi
+        case "${DEVICE_2}" in
+          "beryllium")
+             script="beryllium.sh"
+             ;;
+          "riva" | "rolex" | "ugglite")
+             script="mi8917.sh"
+             ;;
+          *)
+          echo "Unsupported device: ${DEVICE_2}"
+          exit 1
+          ;;
+        esac
+        wget "https://raw.githubusercontent.com/Rve27/RvKernel-Builder/main/scripts/${script}" && chmod +x "${script}" && bash "${script}"
