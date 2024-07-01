@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 rm -rf kernel
-git clone --depth=1 $source_kernel -b $branch kernel
+git clone --depth=1 --recursive $source_kernel -b $branch kernel
 cd kernel
 
 setup_clang() {
@@ -86,6 +86,7 @@ finderr() {
         -d chat_id="$chat_id" \
         -d "disable_web_page_preview=true" \
         -d "parse_mode=markdown" \
+        -d "message_thread_id="${topic_id}" \
         -d text="Build failed | *${DEVICE} (${CODENAME})* | ${KBUILD_COMPILER_STRING}"
     exit 1
 }
