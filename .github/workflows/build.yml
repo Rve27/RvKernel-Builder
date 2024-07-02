@@ -24,6 +24,9 @@ on:
       topic_id:
           description: 'Telegram topic id'
           required: true
+      status:
+          description: 'Status build'
+          required: true
 
 env:
   TZ: Asia/Jakarta
@@ -34,6 +37,7 @@ env:
   chat_id: ${{ github.event.inputs.chat_id }}
   chat_id_2: ${{ github.event.inputs.chat_id_2 }}
   topic_id: ${{ github.event.inputs.topic_id }}
+  STATUS: ${{ github.event.inputs.status }}
 
 jobs:
   build:
