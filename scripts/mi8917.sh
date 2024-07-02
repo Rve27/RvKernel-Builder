@@ -36,8 +36,6 @@ COMMIT_HASH=$(git rev-parse --short HEAD)
 export COMMIT_HASH
 PROCS=$(nproc --all)
 export PROCS
-STATUS=Testing
-export STATUS
 ccache -M 100G
 export USE_CCACHE=1
 LC_ALL=C
