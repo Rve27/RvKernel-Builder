@@ -87,6 +87,7 @@ sendinfo() {
 
 # Push kernel to channel
 push() {
+    cd $GITHUB_WORKSPACE/kernel/out/RvKernel
     ZIP=$(echo *.zip)
     tgs "${ZIP}" "Build took $((DIFF / 60)) minute(s) and $((DIFF % 60)) second(s). | For *${DEVICE} (${CODENAME})* | ${KBUILD_COMPILER_STRING}"
 }
