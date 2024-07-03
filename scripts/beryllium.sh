@@ -92,7 +92,6 @@ finderr() {
 compile() {
     cp RvKernel/SE/* arch/arm64/boot/dts/qcom/
     cp RvKernel/OC/sdm845-v2.dtsi arch/arm64/boot/dts/qcom/
-    cp RvKernel/OC/gpucc-sdm845.c drivers/clk/qcom/
 
     make O=out ARCH=arm64 $DEFCONFIG
     make -j$(nproc --all) O=out LLVM=1 \
@@ -125,7 +124,7 @@ zipping() {
 
 success() {
     tg "
-Build success
+Build successful
 *${DEVICE} (${CODENAME})* | ${KBUILD_COMPILER_STRING}
 $((DIFF / 60)) minute(s) and $((DIFF % 60)) second(s)."
 }
