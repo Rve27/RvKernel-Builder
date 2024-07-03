@@ -80,10 +80,11 @@ push() {
 
 # Catch Error
 finderr() {
-    curl -s -X POST "https://api.telegram.org/bot$token/sendMessage" \
-        -d chat_id="$chat_id" \
-        -d "disable_web_page_preview=true" \
-        -d "parse_mode=markdown" \
+    curl -sX POST https://api.telegram.org/bot"${token}"/sendMessage \
+        -d chat_id="${chat_id}" \
+        -d parse_mode=Markdown \
+        -d disable_web_page_preview=true \
+        -d message_thread_id="${topic_id}" \
         -d text="Build failed | *${DEVICE} (${CODENAME})* | ${KBUILD_COMPILER_STRING}"
     exit 1
 }
