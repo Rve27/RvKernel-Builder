@@ -54,6 +54,9 @@ jobs:
           "beryllium")
              script="beryllium.sh"
              ;;
+          "beryllium-stable")
+             script="beryllium-stable.sh"
+             ;;
           "riva" | "rolex" | "ugglite")
              script="mi8917.sh"
              ;;
